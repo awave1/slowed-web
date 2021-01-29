@@ -1,18 +1,18 @@
-import { useState, useEffect, useRef } from "react";
+import {useEffect, useState} from "react";
 import {
+  Box,
+  Button,
+  Flex,
+  HStack,
   Slider,
-  SliderTrack,
   SliderFilledTrack,
   SliderThumb,
-  Box,
-  Flex,
+  SliderTrack,
   Text,
-  Button,
   VStack,
-  HStack,
 } from "@chakra-ui/react";
 import Head from "next/head";
-import { useDropzone } from "react-dropzone";
+import {useDropzone} from "react-dropzone";
 
 export default function Home() {
   const [playbackRate, setPlaybackRate] = useState(0.9);
@@ -25,16 +25,11 @@ export default function Home() {
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
     maxFiles: 1,
   });
-  const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
-    async function cb() {
-      if (acceptedFiles.length === 1) {
-        setAudioContext(new AudioContext());
-      }
+    if (acceptedFiles.length === 1) {
+      setAudioContext(new AudioContext());
     }
-
-    cb();
   }, [acceptedFiles]);
 
   useEffect(() => {
@@ -43,25 +38,23 @@ export default function Home() {
     }
   }, [audioContext]);
 
+  useEffect(() => {
+    if (source) {
+      source.playbackRate.value = playbackRate;
+    }
+  }, [playbackRate, source]);
+
   const onPlayClicked = async () => {
     if (!audioContext || !source) {
-      console.error("cant play");
+      console.error("cant play, `audioContext` or `source` is undefined");
       return;
     }
 
     try {
       const [audioFile] = acceptedFiles;
       const audioData = await audioFile.arrayBuffer();
-      audioContext.decodeAudioData(
-        audioData,
-        (buffer) => {
-          source.buffer = buffer;
-          source.playbackRate.value = playbackRate;
-          source.connect(audioContext.destination);
-          console.log({ playbackRate });
-        },
-        (err) => console.error(err)
-      );
+      source.buffer = await audioContext.decodeAudioData(audioData);
+      source.connect(audioContext.destination);
 
       source.start(0);
     } catch (err) {
@@ -121,7 +114,8 @@ export default function Home() {
             max={1}
             min={0.5}
             step={0.1}
-            onChange={onPlaybackRateChanged}
+            onChange={setPlaybackRate}
+            value={playbackRate}
           >
             <SliderTrack>
               <SliderFilledTrack />
