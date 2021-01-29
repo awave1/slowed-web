@@ -11,12 +11,19 @@ import {
   SliderTrack,
   Text,
   VStack,
+  IconButton,
 } from "@chakra-ui/react";
+import { FaPauseCircle, FaPlayCircle } from "react-icons/fa";
+
+// TODO: this is no bueno, gotta redo
+const audioContext = new AudioContext();
+let audioBufferSourceNode = audioContext.createBufferSource();
 
 function App() {
   const [playbackRate, setPlaybackRate] = useState(0.9);
-  const [audioContext] = useState<AudioContext>(new AudioContext());
   const [audioFile, setAudioFile] = useState<File | undefined>();
+  const [playing, setPlaying] = useState(false);
+
   const onDropAccepted = useCallback((acceptedFiles: File[]) => {
     setAudioFile(acceptedFiles[0]);
   }, []);
@@ -25,13 +32,11 @@ function App() {
     onDropAccepted,
   });
 
-  let audioBufferSourceNode = audioContext.createBufferSource();
-
   useEffect(() => {
     if (audioBufferSourceNode) {
       audioBufferSourceNode.playbackRate.value = playbackRate;
     }
-  }, [playbackRate, audioBufferSourceNode]);
+  }, [playbackRate]);
 
   const onPlayClicked = async () => {
     if (!audioContext || !audioBufferSourceNode || !audioFile) {
@@ -40,15 +45,22 @@ function App() {
     }
 
     try {
-      audioBufferSourceNode = audioContext.createBufferSource();
+      if (!playing) {
+        audioBufferSourceNode = audioContext.createBufferSource();
 
-      const audioData = await audioFile.arrayBuffer();
-      audioBufferSourceNode.buffer = await audioContext.decodeAudioData(
-        audioData
-      );
-      audioBufferSourceNode.connect(audioContext.destination);
+        const audioData = await audioFile.arrayBuffer();
+        audioBufferSourceNode.buffer = await audioContext.decodeAudioData(
+          audioData
+        );
+        audioBufferSourceNode.playbackRate.value = playbackRate;
+        audioBufferSourceNode.connect(audioContext.destination);
 
-      audioBufferSourceNode.start(0);
+        audioBufferSourceNode.start(0);
+        setPlaying(true);
+      } else {
+        audioBufferSourceNode.stop(0);
+        setPlaying(false);
+      }
     } catch (err) {
       console.error(err);
     }
@@ -85,8 +97,11 @@ function App() {
             <Text fontSize="xl">{audioFile.name}</Text>
 
             <HStack spacing={6}>
-              <Button onClick={onPlayClicked}>Play</Button>
-              <Button onClick={onStopClicked}>Stop</Button>
+              <IconButton
+                aria-label="play pause button"
+                icon={!playing ? <FaPlayCircle /> : <FaPauseCircle />}
+                onClick={onPlayClicked}
+              />
             </HStack>
 
             <VStack>
