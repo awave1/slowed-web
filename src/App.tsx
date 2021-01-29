@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import {
   Box,
-  Button,
   Flex,
   HStack,
   Slider,
@@ -63,12 +62,6 @@ function App() {
       }
     } catch (err) {
       console.error(err);
-    }
-  };
-
-  const onStopClicked = () => {
-    if (audioBufferSourceNode) {
-      audioBufferSourceNode.stop(0);
     }
   };
 
