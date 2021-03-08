@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import {
   Box,
@@ -13,55 +13,56 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { FaPauseCircle, FaPlayCircle } from "react-icons/fa";
-
-// TODO: this is no bueno, gotta redo
-const audioContext = new AudioContext();
-let audioBufferSourceNode = audioContext.createBufferSource();
+import { Howl } from "howler";
 
 function App() {
   const [playbackRate, setPlaybackRate] = useState(0.9);
   const [audioFile, setAudioFile] = useState<File | undefined>();
   const [playing, setPlaying] = useState(false);
+  const [sound, setSound] = useState<Howl | undefined>(undefined);
 
-  const onDropAccepted = useCallback((acceptedFiles: File[]) => {
-    setAudioFile(acceptedFiles[0]);
-  }, []);
+  const onDropAccepted = (acceptedFiles: File[]) => {
+    const [file] = acceptedFiles;
+    setAudioFile(file);
+
+    const fileReader = new FileReader();
+    fileReader.addEventListener("load", () => {
+      const { result } = fileReader;
+      setSound(
+        new Howl({
+          src: result as string,
+          format: [file.name.split(".").pop()?.toLowerCase() ?? "mp3"],
+          rate: playbackRate,
+        })
+      );
+    });
+    fileReader.readAsDataURL(file);
+  };
+
   const { getRootProps, getInputProps } = useDropzone({
     maxFiles: 1,
     onDropAccepted,
   });
 
-  useEffect(() => {
-    if (audioBufferSourceNode) {
-      audioBufferSourceNode.playbackRate.value = playbackRate;
-    }
-  }, [playbackRate]);
-
   const onPlayClicked = async () => {
-    if (!audioContext || !audioBufferSourceNode || !audioFile) {
+    if (!sound) {
       console.error("most likely audio file is not specified");
       return;
     }
 
-    try {
-      if (!playing) {
-        audioBufferSourceNode = audioContext.createBufferSource();
+    if (!playing) {
+      sound.fade(0, 100, 150).play();
+      setPlaying(true);
+    } else {
+      sound.fade(100, 0, 150).pause();
+      setPlaying(false);
+    }
+  };
 
-        const audioData = await audioFile.arrayBuffer();
-        audioBufferSourceNode.buffer = await audioContext.decodeAudioData(
-          audioData
-        );
-        audioBufferSourceNode.playbackRate.value = playbackRate;
-        audioBufferSourceNode.connect(audioContext.destination);
-
-        audioBufferSourceNode.start(0);
-        setPlaying(true);
-      } else {
-        audioBufferSourceNode.stop(0);
-        setPlaying(false);
-      }
-    } catch (err) {
-      console.error(err);
+  const onPlaybackRateChanged = (value: number) => {
+    if (sound) {
+      setPlaybackRate(value);
+      sound.rate(value);
     }
   };
 
@@ -104,7 +105,7 @@ function App() {
                 max={1}
                 min={0.5}
                 step={0.1}
-                onChange={setPlaybackRate}
+                onChange={onPlaybackRateChanged}
                 value={playbackRate}
               >
                 <SliderTrack>
