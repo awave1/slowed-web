@@ -100,18 +100,14 @@ function App() {
   };
 
   const onSeekChange = (value: number) => {
-    console.log(" seek", { value });
     setSeek(value);
   };
 
   const onSeekStarted = () => {
-    console.log("start seek");
-
     setSeeking(true);
   };
 
   const onSeekEnded = (value: number) => {
-    console.log("end seek", { value });
     setSeeking(false);
     setSeek(value);
     if (!playing) {
