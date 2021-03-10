@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useDropzone } from "react-dropzone";
 import {
   Box,
@@ -18,8 +18,19 @@ import { Howl } from "howler";
 function App() {
   const [playbackRate, setPlaybackRate] = useState(0.9);
   const [audioFile, setAudioFile] = useState<File | undefined>();
-  const [playing, setPlaying] = useState(false);
   const [sound, setSound] = useState<Howl | undefined>(undefined);
+  const [seek, setSeek] = useState(0);
+  const [playing, setPlaying] = useState(false);
+  const [seeking, setSeeking] = useState(false);
+  const requestAnimationFrameIdRef = useRef<number | undefined>(undefined);
+
+  useEffect(() => {
+    if (playing) {
+      requestAnimationFrameIdRef.current = window.requestAnimationFrame(
+        renderSeekPosition
+      );
+    }
+  }, [playing]);
 
   const onDropAccepted = (acceptedFiles: File[]) => {
     const [file] = acceptedFiles;
@@ -53,9 +64,15 @@ function App() {
     if (!playing) {
       sound.fade(0, 100, 150).play();
       setPlaying(true);
+      renderSeekPosition();
     } else {
       sound.fade(100, 0, 150).pause();
       setPlaying(false);
+      console.log({ requestAnimationFrameIdRef });
+
+      if (requestAnimationFrameIdRef.current !== undefined) {
+        window.cancelAnimationFrame(requestAnimationFrameIdRef.current);
+      }
     }
   };
 
@@ -63,6 +80,42 @@ function App() {
     if (sound) {
       setPlaybackRate(value);
       sound.rate(value);
+    }
+  };
+
+  const renderSeekPosition = () => {
+    if (!sound) {
+      return;
+    }
+
+    if (!seeking) {
+      setSeek(sound.seek() as number);
+    }
+
+    if (playing) {
+      requestAnimationFrameIdRef.current = window.requestAnimationFrame(
+        renderSeekPosition
+      );
+    }
+  };
+
+  const onSeekChange = (value: number) => {
+    console.log(" seek", { value });
+    setSeek(value);
+  };
+
+  const onSeekStarted = () => {
+    console.log("start seek");
+
+    setSeeking(true);
+  };
+
+  const onSeekEnded = (value: number) => {
+    console.log("end seek", { value });
+    setSeeking(false);
+    setSeek(value);
+    if (!playing) {
+      sound?.seek(value);
     }
   };
 
@@ -86,7 +139,7 @@ function App() {
           </Box>
         </Flex>
 
-        {audioFile && (
+        {audioFile && sound && (
           <>
             <Text fontSize="xl">{audioFile.name}</Text>
 
@@ -97,6 +150,21 @@ function App() {
                 onClick={onPlayClicked}
               />
             </HStack>
+
+            <Slider
+              min={0}
+              max={Number((sound.duration() as number).toFixed(2))}
+              step={0.01}
+              value={seek}
+              onChange={onSeekChange}
+              onChangeStart={onSeekStarted}
+              onChangeEnd={onSeekEnded}
+            >
+              <SliderTrack>
+                <SliderFilledTrack />
+              </SliderTrack>
+              <SliderThumb />
+            </Slider>
 
             <VStack>
               <Text>Playback Speed</Text>
