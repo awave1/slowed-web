@@ -1,3 +1,15 @@
+import { Action, Thunk } from "easy-peasy";
+import type { Howl } from "howler";
+
 export interface AppStore {
-  songs: string[]; // TODO: replace by an actual model
+  songs: File[];
+  // player: {
+  currentSong?: File;
+  currentSound?: Howl;
+  playing: boolean;
+  seeking: boolean;
+  setCurrentSong: Action<AppStore, File>;
+  setCurrentSound: Action<AppStore, Howl>;
+  addSong: Action<AppStore, File>;
+  // };
 }
