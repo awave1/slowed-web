@@ -14,6 +14,8 @@ export const FileUpload = () => {
     setCurrentSong(file);
     addSong(file);
 
+    // https://github.com/Tonejs/Tone.js#effects
+
     // TODO: uglyyyyyyyyyyyyyyyyyyy
     const fileReader = new FileReader();
     fileReader.addEventListener("load", () => {
