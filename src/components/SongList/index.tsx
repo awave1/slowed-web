@@ -1,4 +1,4 @@
-import { Box, Flex, List, ListItem, ListIcon } from "@chakra-ui/react";
+import { Flex, List, ListItem, ListIcon } from "@chakra-ui/react";
 import { useAction, useStore } from "../../store/hooks";
 import { FileUpload } from "../FileUpload";
 import { FaMusic } from "react-icons/fa";
