@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Flex, List, ListItem, ListIcon, Box } from "@chakra-ui/react";
 import { useAction, useStore } from "../../store/hooks";
 import { FileUpload } from "../FileUpload";
@@ -7,6 +8,7 @@ import styled from "styled-components";
 
 export const SongList = () => {
   const songs = useStore((state) => state.songs);
+  const currentSong = useStore((state) => state.currentSong);
   const setCurrentSong = useAction((state) => state.setCurrentSong);
   const setCurrentSound = useAction((state) => state.setCurrentSound);
 
@@ -36,7 +38,11 @@ export const SongList = () => {
             <ListItem
               key={song.name}
               onClick={onSongSelected(song)}
-              bg="gray.200"
+              bg={
+                currentSong && song.name === currentSong.name
+                  ? "gray.300"
+                  : "gray.200"
+              }
               p="8"
               borderRadius="8px"
             >
