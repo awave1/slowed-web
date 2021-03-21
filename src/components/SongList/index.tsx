@@ -1,8 +1,9 @@
-import { Flex, List, ListItem, ListIcon } from "@chakra-ui/react";
+import { Flex, List, ListItem, ListIcon, Box } from "@chakra-ui/react";
 import { useAction, useStore } from "../../store/hooks";
 import { FileUpload } from "../FileUpload";
 import { FaMusic } from "react-icons/fa";
 import { Howl } from "howler";
+import styled from "styled-components";
 
 export const SongList = () => {
   const songs = useStore((state) => state.songs);
@@ -29,14 +30,22 @@ export const SongList = () => {
 
   return (
     <Flex direction="column" justify="space-between" height="100%">
-      <List spacing={3}>
-        {songs.map((song) => (
-          <ListItem key={song.name} onClick={onSongSelected(song)}>
-            <ListIcon as={FaMusic} color="grey.500" />
-            {song.name}
-          </ListItem>
-        ))}
-      </List>
+      <Box overflowY="auto" marginBottom="8">
+        <List spacing={3}>
+          {songs.map((song) => (
+            <ListItem
+              key={song.name}
+              onClick={onSongSelected(song)}
+              bg="gray.200"
+              p="8"
+              borderRadius="8px"
+            >
+              <ListIcon as={FaMusic} color="grey.500" />
+              {song.name}
+            </ListItem>
+          ))}
+        </List>
+      </Box>
       <FileUpload />
     </Flex>
   );

@@ -42,7 +42,7 @@ export const FileUpload = () => {
   });
 
   return (
-    <Flex bgColor="gray.100" borderRadius={16}>
+    <Flex bgColor="gray.200" borderRadius={16}>
       <Box width="100%">
         <Flex width="100%" height={32} {...getRootProps()}>
           <input {...getInputProps()} />

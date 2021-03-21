@@ -13,19 +13,20 @@ function App() {
     <Flex
       direction="column"
       justify="space-between"
+      justifyContent="center"
       alignItems="center"
       height="100vh"
     >
       <Grid
-        h="100vh"
+        w="60vw"
+        h="60vh"
         templateRows="repeat(2, 1fr)"
         templateColumns="repeat(5, 1fr)"
-        gap={4}
       >
-        <Panel rowSpan={2} colSpan={2}>
+        <Panel rowSpan={2} colSpan={2} bg="gray.100">
           <SongList />
         </Panel>
-        <Panel rowSpan={2} colSpan={3}>
+        <Panel rowSpan={2} colSpan={3} bg="gray.50">
           <PlayerView />
         </Panel>
       </Grid>
