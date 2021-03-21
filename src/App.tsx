@@ -18,8 +18,8 @@ function App() {
       height="100vh"
     >
       <Grid
-        w="60vw"
-        h="60vh"
+        w={["100%", "100%", "100%", "100%", "60vw"]}
+        h={["100%", "100%", "100%", "100%", "60vh"]}
         templateRows="repeat(2, 1fr)"
         templateColumns="repeat(5, 1fr)"
       >
