@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Flex, List, ListItem, ListIcon, Box } from "@chakra-ui/react";
 import { useAction, useStore } from "../../store/hooks";
 import { FileUpload } from "../FileUpload";

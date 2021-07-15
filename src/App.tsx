@@ -1,3 +1,4 @@
+import React from "react";
 import { Grid, GridItem, Flex, Container } from "@chakra-ui/react";
 import styled from "styled-components";
 import { Footer } from "./components/Footer";
@@ -8,7 +9,7 @@ const Panel = styled(GridItem)`
   padding: 36px;
 `;
 
-function App() {
+export function App() {
   return (
     <Flex
       direction="column"
@@ -35,5 +36,3 @@ function App() {
     </Flex>
   );
 }
-
-export default App;

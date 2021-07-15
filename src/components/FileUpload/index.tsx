@@ -1,3 +1,4 @@
+import React from "react";
 import { Text, Box, Flex } from "@chakra-ui/react";
 import { Howl } from "howler";
 import { useDropzone } from "react-dropzone";

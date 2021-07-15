@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Text,
   IconButton,
@@ -25,9 +25,8 @@ export const PlayerView = () => {
 
   useEffect(() => {
     if (playing) {
-      requestAnimationFrameIdRef.current = window.requestAnimationFrame(
-        renderSeekPosition
-      );
+      requestAnimationFrameIdRef.current =
+        window.requestAnimationFrame(renderSeekPosition);
     }
   }, [playing]);
 
@@ -68,9 +67,8 @@ export const PlayerView = () => {
     }
 
     if (playing) {
-      requestAnimationFrameIdRef.current = window.requestAnimationFrame(
-        renderSeekPosition
-      );
+      requestAnimationFrameIdRef.current =
+        window.requestAnimationFrame(renderSeekPosition);
     }
   };
 
