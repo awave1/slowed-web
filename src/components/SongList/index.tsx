@@ -4,7 +4,6 @@ import { useAction, useStore } from "../../store/hooks";
 import { FileUpload } from "../FileUpload";
 import { FaMusic } from "react-icons/fa";
 import { Howl } from "howler";
-import styled from "styled-components";
 
 export const SongList = () => {
   const songs = useStore((state) => state.songs);
