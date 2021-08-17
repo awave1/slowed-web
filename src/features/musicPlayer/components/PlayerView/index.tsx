@@ -10,7 +10,7 @@ import {
   SliderThumb,
 } from "@chakra-ui/react";
 import { FaPauseCircle, FaPlayCircle } from "react-icons/fa";
-import { useStore } from "../../store/hooks";
+import { useStore } from "../../../../store/hooks";
 
 export const PlayerView = () => {
   // TODO: rename to currentSong

@@ -2,7 +2,7 @@ import React from "react";
 import { Text, Box, Flex } from "@chakra-ui/react";
 import { Howl } from "howler";
 import { useDropzone } from "react-dropzone";
-import { useAction } from "../../store/hooks";
+import { useAction } from "../../../../store/hooks";
 
 const MAX_FILES = 1;
 

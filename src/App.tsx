@@ -1,9 +1,9 @@
 import React from "react";
 import { Grid, GridItem, Flex, Container } from "@chakra-ui/react";
 import styled from "styled-components";
-import { Footer } from "./components/Footer";
-import { PlayerView } from "./components/PlayerView";
-import { SongList } from "./components/SongList";
+import { Footer } from "./features/shell/components/Footer";
+import { PlayerView } from "./features/musicPlayer/components/PlayerView";
+import { SongList } from "./features/musicPlayer/components/SongList";
 
 const Panel = styled(GridItem)`
   padding: 36px;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Flex, List, ListItem, ListIcon, Box } from "@chakra-ui/react";
-import { useAction, useStore } from "../../store/hooks";
-import { FileUpload } from "../FileUpload";
+import { useAction, useStore } from "../../../../store/hooks";
+import { FileUpload } from "../../../fileUpload/components/FileUpload";
 import { FaMusic } from "react-icons/fa";
 import { Howl } from "howler";
 
