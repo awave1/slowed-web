@@ -1,10 +1,13 @@
 import React from "react";
-import { Text, Box, Flex } from "@chakra-ui/react";
 import { Howl } from "howler";
 import { useDropzone } from "react-dropzone";
-import { useAction } from "../../../../store/hooks";
-
-const MAX_FILES = 1;
+import { useAction } from "@slowed/store/hooks";
+import { MAX_FILES } from "@slowed/features/fileUpload/data/constants";
+import {
+  FileUploadWrapper,
+  InputContainer,
+  UploadText,
+} from "@slowed/features/fileUpload/components/FileUpload/styles.css";
 
 export const FileUpload = () => {
   const setCurrentSong = useAction((actions) => actions.setCurrentSong);
@@ -43,21 +46,11 @@ export const FileUpload = () => {
   });
 
   return (
-    <Flex bgColor="gray.200" borderRadius={16}>
-      <Box width="100%">
-        <Flex width="100%" height={32} {...getRootProps()}>
-          <input {...getInputProps()} />
-          <Text
-            width="auto"
-            height="auto"
-            fontSize="lg"
-            alignSelf="center"
-            p={16}
-          >
-            Drop an audio file here or click to add
-          </Text>
-        </Flex>
-      </Box>
-    </Flex>
+    <div className={FileUploadWrapper}>
+      <div className={InputContainer} {...getRootProps()}>
+        <input {...getInputProps()} />
+        <p className={UploadText}>Drop an audio file here or click to add</p>
+      </div>
+    </div>
   );
 };
