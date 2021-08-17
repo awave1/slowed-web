@@ -1,5 +1,5 @@
 import React from "react";
-import { Box } from "@chakra-ui/layout";
+import { Box } from "@chakra-ui/react";
 
 export const Footer = () => (
   <Box as="footer" w={["100%", "100%", "100%", "100%", "60vw"]} bg="gray.300">
