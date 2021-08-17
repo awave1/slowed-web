@@ -40,7 +40,7 @@ export function useFileUpload() {
   });
 
   return {
-    operations: {
+    props: {
       getRootProps,
       getInputProps,
     },

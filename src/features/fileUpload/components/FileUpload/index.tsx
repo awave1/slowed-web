@@ -7,12 +7,12 @@ import {
 import { useFileUpload } from "@slowed/features/fileUpload/components/FileUpload/useFileUpload";
 
 export const FileUpload = () => {
-  const { operations } = useFileUpload();
+  const { props } = useFileUpload();
 
   return (
     <div className={FileUploadWrapper}>
-      <div className={InputContainer} {...operations.getRootProps()}>
-        <input {...operations.getInputProps()} />
+      <div className={InputContainer} {...props.getRootProps()}>
+        <input {...props.getInputProps()} />
         <p className={UploadText}>Drop an audio file here or click to add</p>
       </div>
     </div>
