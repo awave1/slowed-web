@@ -4,7 +4,7 @@ import { style } from "@vanilla-extract/css";
 export const FileUploadWrapper = style({
   display: "flex",
   borderRadius: 16,
-  backgroundColor: "pink",
+  backgroundColor: "#E4E9F0",
 });
 
 export const InputContainer = style({
