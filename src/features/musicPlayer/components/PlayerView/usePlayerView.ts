@@ -83,12 +83,14 @@ export function usePlayerView() {
     state: {
       playing,
       seek,
+      playbackRate,
     },
     handlers: {
       onPlayClicked,
       onSeekChange,
       onSeekStarted,
       onSeekEnded,
+      onPlaybackRateChanged,
     },
   };
 }
