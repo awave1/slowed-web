@@ -1,11 +1,11 @@
 import { useStore } from "@slowed/store/hooks";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 export function usePlayerView() {
-  // TODO: rename to currentSong
   const currentSong = useStore((store) => store.currentSong);
   const sound = useStore((state) => state.currentSound);
 
+  // TODO: lift the playbackRate to redux
   const [playbackRate, setPlaybackRate] = useState(0.9);
   const [seek, setSeek] = useState(0);
   const [playing, setPlaying] = useState(false);
@@ -39,8 +39,11 @@ export function usePlayerView() {
     }
   };
 
-  const onPlaybackRateChanged = (value: number) => {
+  const onPlaybackRateChanged = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     if (sound) {
+      const value = Number.parseFloat(event.target.value);
       setPlaybackRate(value);
       sound.rate(value);
     }
@@ -61,8 +64,8 @@ export function usePlayerView() {
     }
   };
 
-  const onSeekChange = (value: number) => {
-    setSeek(value);
+  const onSeekChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSeek(Number.parseFloat(event.target.value));
   };
 
   const onSeekStarted = () => {

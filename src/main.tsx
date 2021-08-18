@@ -8,9 +8,9 @@ import { store } from "./store/store";
 ReactDOM.render(
   <React.StrictMode>
     <StoreProvider store={store}>
-      <ChakraProvider>
-        <App />
-      </ChakraProvider>
+      {/* <ChakraProvider> */}
+      <App />
+      {/* </ChakraProvider> */}
     </StoreProvider>
   </React.StrictMode>,
   document.getElementById("root")
