@@ -1,8 +1,8 @@
 import React from "react";
-import { Box } from "@chakra-ui/react";
+import { FooterContainer } from "@slowed/features/shell/components/Footer/styles.css";
 
 export const Footer = () => (
-  <Box as="footer" w={["100%", "100%", "100%", "100%", "60vw"]} bg="gray.300">
+  <footer className={FooterContainer}>
     <a
       href="https://github.com/awave1/"
       target="_blank"
@@ -10,5 +10,5 @@ export const Footer = () => (
     >
       made by awave
     </a>
-  </Box>
+  </footer>
 );
