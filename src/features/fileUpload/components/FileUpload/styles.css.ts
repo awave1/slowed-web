@@ -1,10 +1,13 @@
 import { style } from "@vanilla-extract/css";
+import { light } from "@slowed/app/theme";
+
+// console.log(light.theme.color);
 
 // bgColor="gray.200" borderRadius={16}
 export const FileUploadWrapper = style({
   display: "flex",
   borderRadius: 16,
-  backgroundColor: "#E4E9F0",
+  backgroundColor: light.theme.color.bg,
 });
 
 export const InputContainer = style({
