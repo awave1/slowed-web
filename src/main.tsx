@@ -4,6 +4,7 @@ import { StoreProvider } from "easy-peasy";
 import { store } from "@slowed/store/store";
 import { App } from "@slowed/app";
 import { ThemeProvider } from "@slowed/app/theme/ThemeProvider";
+import "modern-css-reset";
 
 ReactDOM.render(
   <React.StrictMode>
