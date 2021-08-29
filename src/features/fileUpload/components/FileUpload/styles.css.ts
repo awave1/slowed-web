@@ -1,14 +1,18 @@
-import { style } from "@vanilla-extract/css";
-import { light } from "@slowed/app/theme";
+import { composeStyles, style } from "@vanilla-extract/css";
+import { atoms } from "@slowed/app/style/sprinkles.css";
 
-// console.log(light.theme.color);
-
-// bgColor="gray.200" borderRadius={16}
-export const FileUploadWrapper = style({
-  display: "flex",
-  borderRadius: 16,
-  backgroundColor: light.theme.color.bg,
-});
+export const FileUploadWrapper = composeStyles(
+  atoms({
+    background: {
+      light: "blue-100",
+      dark: "gray-900",
+    },
+  }),
+  style({
+    display: "flex",
+    borderRadius: 16,
+  })
+);
 
 export const InputContainer = style({
   display: "flex",

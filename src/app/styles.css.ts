@@ -1,12 +1,21 @@
-import { style } from "@vanilla-extract/css";
+import { composeStyles, style } from "@vanilla-extract/css";
+import { atoms } from "@slowed/app/style/sprinkles.css";
 
-export const AppContainer = style({
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
-  height: "100vh",
-});
+export const AppContainer = composeStyles(
+  atoms({
+    background: {
+      light: "blue-100",
+      dark: "gray-700",
+    },
+  }),
+  style({
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100vh",
+  })
+);
 
 export const MainGrid = style({
   display: "grid",

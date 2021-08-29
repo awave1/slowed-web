@@ -1,40 +1,32 @@
 import React, { useEffect, useState, createContext, useContext } from "react";
 import type { ReactNode } from "react";
 import type { ThemeVariant, ThemeContextValues } from "@slowed/app/theme/types";
-import { dark, light } from "@slowed/app/theme";
 
 export const ThemeContext = createContext<ThemeContextValues>({
-  themeVariant: "light",
+  themeVariant: "dark",
   setThemeVariant: () => {},
 });
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [themeVariant, setThemeVariant] = useState<ThemeVariant>("light");
+  const [themeVariant, setThemeVariant] = useState<ThemeVariant>("dark");
+  const themeClasses: [ThemeVariant, ThemeVariant] = ["dark", "light"];
+
+  const toggleDocumentThemeClass = (variant: ThemeVariant) => {
+    document.documentElement.classList.remove(...themeClasses);
+    document.documentElement.classList.add(variant);
+  };
 
   useEffect(() => {
-    console.log({ themeVariant });
-    setThemeVariant(
-      document.documentElement.classList.contains(dark.className)
-        ? "dark"
-        : "light"
-    );
+    setThemeVariant("dark");
   }, []);
 
   useEffect(() => {
-    document.documentElement.classList.remove(light.className, dark.className);
-
-    document.documentElement.classList.add(
-      themeVariant === "dark" ? dark.className : light.className
-    );
+    toggleDocumentThemeClass(themeVariant);
   }, [themeVariant]);
 
   const setTheme = (variant: ThemeVariant) => {
     setThemeVariant(variant);
-    document.documentElement.classList.remove(light.className, dark.className);
-
-    document.documentElement.classList.add(
-      variant === "dark" ? dark.className : light.className
-    );
+    toggleDocumentThemeClass(variant);
   };
 
   return (
