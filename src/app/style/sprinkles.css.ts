@@ -57,7 +57,7 @@ const buildColorPalette = () => {
   );
 };
 
-const palette = buildColorPalette();
+export const palette = buildColorPalette();
 
 export const lightMode = "light";
 export const darkMode = "dark";

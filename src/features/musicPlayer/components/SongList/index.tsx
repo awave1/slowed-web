@@ -1,5 +1,4 @@
 import React from "react";
-import { FaMusic } from "react-icons/fa";
 import { useSongList } from "@slowed/features/musicPlayer/components/SongList/useSongList";
 import { FileUpload } from "@slowed/features/fileUpload/components/FileUpload";
 import {
@@ -18,6 +17,7 @@ export const SongList = () => {
       <div className={SongListWrapper}>
         <ul className={List}>
           {songs.map((song) => (
+            // TODO: extract
             <li
               className={
                 currentSong && song.name === currentSong.name
@@ -27,7 +27,6 @@ export const SongList = () => {
               key={song.name}
               onClick={handlers.onSongSelected(song)}
             >
-              <FaMusic />
               {song.name}
             </li>
           ))}

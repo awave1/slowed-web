@@ -4,10 +4,6 @@ import { theme } from "@slowed/app/theme/styles.css";
 
 export const FileUploadWrapper = composeStyles(
   atoms({
-    color: {
-      light: "gray-900",
-      dark: "gray-50",
-    },
     borderColor: {
       light: "gray-900",
       dark: "gray-50",
@@ -15,10 +11,11 @@ export const FileUploadWrapper = composeStyles(
   }),
   style({
     display: "flex",
+    alignItems: "center",
     borderRadius: 16,
     border: "1px dashed",
     height: 75,
-    alignItems: "center",
+    cursor: "pointer",
   })
 );
 

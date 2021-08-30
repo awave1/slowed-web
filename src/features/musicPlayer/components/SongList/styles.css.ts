@@ -1,3 +1,5 @@
+import { atoms } from "@slowed/app/style/sprinkles.css";
+import { theme } from "@slowed/app/theme/styles.css";
 import { style, composeStyles } from "@vanilla-extract/css";
 
 export const SongListContainer = style({
@@ -13,18 +15,29 @@ export const SongListWrapper = style({
 });
 
 export const List = style({
+  display: "flex",
+  flexDirection: "column",
+  gap: 8,
   listStyle: "none",
 });
 
-export const ListItem = style({
-  borderRadius: 8,
-  padding: 8,
-  backgroundColor: "#E4E9F0",
-});
+export const ListItem = composeStyles(
+  style({
+    cursor: "pointer",
+    borderRadius: 8,
+    padding: 8,
+    transition: "all 100ms ease-in-out",
+    ":hover": {
+      fontWeight: "bold",
+      color: theme.colors["rose-200"],
+    },
+  })
+);
 
 export const ListItemActive = composeStyles(
   ListItem,
   style({
-    backgroundColor: "#CACFD7",
+    fontWeight: "bold",
+    color: theme.colors["rose-400"],
   })
 );

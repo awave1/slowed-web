@@ -7,6 +7,10 @@ export const AppContainer = composeStyles(
       dark: "gray-900",
       light: "warmGray-300",
     },
+    color: {
+      light: "black",
+      dark: "white",
+    },
   }),
   style({
     display: "flex",
