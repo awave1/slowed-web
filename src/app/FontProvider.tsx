@@ -7,7 +7,7 @@ const FontContext = createContext(null);
 export const FontProvider: FC = ({ children }) => {
   useEffect(() => {
     WebFont.load({
-      google: { families: ["Noto Sans JP"] },
+      google: { families: ["Noto Sans JP", "Lato"] },
     });
   }, []);
   return <FontContext.Provider value={null}>{children}</FontContext.Provider>;

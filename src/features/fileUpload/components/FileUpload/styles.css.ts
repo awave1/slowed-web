@@ -1,5 +1,6 @@
 import { composeStyles, style } from "@vanilla-extract/css";
 import { atoms } from "@slowed/app/style/sprinkles.css";
+import { theme } from "@slowed/app/theme/styles.css";
 
 export const FileUploadWrapper = composeStyles(
   atoms({
@@ -30,6 +31,7 @@ export const InputContainer = style({
 });
 
 export const UploadText = style({
+  textTransform: "lowercase",
   width: "auto",
   height: "auto",
   alignSelf: "center",

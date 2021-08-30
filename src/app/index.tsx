@@ -9,6 +9,7 @@ import { SongList } from "@slowed/features/musicPlayer/components/SongList";
 import { PlayerView } from "@slowed/features/musicPlayer/components/PlayerView";
 import { Footer } from "@slowed/features/shell/components/Footer";
 import { useThemeProvider } from "@slowed/app/theme/ThemeProvider";
+import "@slowed/app/app.css";
 
 export function App() {
   const { themeVariant, setThemeVariant } = useThemeProvider();
