@@ -4,8 +4,8 @@ import { atoms } from "@slowed/app/style/sprinkles.css";
 export const AppContainer = composeStyles(
   atoms({
     background: {
-      light: "blue-100",
-      dark: "gray-700",
+      dark: "gray-900",
+      light: "warmGray-300",
     },
   }),
   style({
@@ -29,20 +29,22 @@ export const SongListContainer = composeStyles(
   atoms({
     background: {
       dark: "gray-900",
-      light: "gray-900",
+      light: "warmGray-300",
     },
   }),
   style({
     gridColumn: "span 2/span 2",
     gridRow: "span 2/span 2",
     padding: 36,
-    backgroundColor: "pink",
   })
 );
 
 export const PlayerViewContainer = composeStyles(
   atoms({
-    background: "gray-700",
+    background: {
+      dark: "gray-700",
+      light: "warmGray-200",
+    },
   }),
   style({
     gridColumn: "span 3/span 3",

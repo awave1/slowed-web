@@ -25,7 +25,7 @@ type ColorName =
   | "coolGray"
   | "blueGray";
 
-type ColorValues = 50 | 100 | 200 | 300 | 400 | 700 | 800 | 900;
+type ColorValues = 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
 
 type BaseColor = "black" | "white";
 type ColorKey = `${ColorName}-${ColorValues}` | BaseColor;
@@ -59,13 +59,13 @@ const buildColorPalette = () => {
 
 const palette = buildColorPalette();
 
-const light = "light";
-const dark = "dark";
+export const lightMode = "light";
+export const darkMode = "dark";
 
 const colors = createAtomicStyles({
   conditions: {
-    light: { selector: `${light} &` },
-    dark: { selector: `.${dark} &` },
+    light: {},
+    dark: { selector: `.${darkMode} &` },
   },
   defaultCondition: "dark",
   properties: {
