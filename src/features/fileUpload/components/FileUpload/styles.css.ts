@@ -5,8 +5,12 @@ import { theme } from "@slowed/app/theme/styles.css";
 export const FileUploadWrapper = composeStyles(
   atoms({
     borderColor: {
-      light: "gray-900",
-      dark: "gray-50",
+      light: "gray-800",
+      dark: "gray-200",
+    },
+    color: {
+      light: "gray-800",
+      dark: "gray-200",
     },
   }),
   style({
@@ -16,6 +20,10 @@ export const FileUploadWrapper = composeStyles(
     border: "1px dashed",
     height: 75,
     cursor: "pointer",
+    transition: `all ${theme.transition.duration.default} ${theme.transition.easing.easeInOut}`,
+    ":hover": {
+      filter: "brightness(150%)",
+    },
   })
 );
 
@@ -27,10 +35,18 @@ export const InputContainer = style({
   justifyContent: "center",
 });
 
-export const UploadText = style({
-  textTransform: "lowercase",
-  width: "auto",
-  height: "auto",
-  alignSelf: "center",
-  padding: 16,
-});
+export const UploadText = composeStyles(
+  atoms({
+    // color: {
+    //   light: "gray-800",
+    //   dark: "gray-200",
+    // },
+  }),
+  style({
+    textTransform: "lowercase",
+    width: "auto",
+    height: "auto",
+    alignSelf: "center",
+    padding: 16,
+  })
+);

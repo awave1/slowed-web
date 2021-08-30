@@ -26,7 +26,7 @@ export const ListItem = composeStyles(
     cursor: "pointer",
     borderRadius: 8,
     padding: 8,
-    transition: "all 100ms ease-in-out",
+    transition: `all ${theme.transition.duration.default} ${theme.transition.easing.easeInOut}`,
     ":hover": {
       fontWeight: "bold",
       color: theme.colors["rose-200"],
