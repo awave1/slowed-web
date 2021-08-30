@@ -3,21 +3,30 @@ import { atoms } from "@slowed/app/style/sprinkles.css";
 
 export const FileUploadWrapper = composeStyles(
   atoms({
-    background: {
-      light: "blue-100",
-      dark: "gray-900",
+    color: {
+      light: "gray-900",
+      dark: "gray-50",
+    },
+    borderColor: {
+      light: "gray-900",
+      dark: "gray-50",
     },
   }),
   style({
     display: "flex",
     borderRadius: 16,
+    border: "1px dashed",
+    height: 75,
+    alignItems: "center",
   })
 );
 
 export const InputContainer = style({
   display: "flex",
   width: "100%",
-  height: 32,
+  height: 75,
+  alignContent: "center",
+  justifyContent: "center",
 });
 
 export const UploadText = style({

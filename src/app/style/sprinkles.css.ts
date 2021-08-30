@@ -72,6 +72,7 @@ const colors = createAtomicStyles({
     color: palette,
     background: palette,
     backgroundColor: palette,
+    borderColor: palette,
   },
 });
 
