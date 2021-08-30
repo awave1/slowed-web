@@ -10,3 +10,10 @@ export const FooterContainer = composeStyles(
   }),
   style({ width: "100%" })
 );
+
+export const FooterLink = atoms({
+  color: {
+    light: "rose-700",
+    dark: "warmGray-50",
+  },
+});

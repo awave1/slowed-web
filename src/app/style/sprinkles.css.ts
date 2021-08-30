@@ -71,6 +71,7 @@ const colors = createAtomicStyles({
   properties: {
     color: palette,
     background: palette,
+    backgroundColor: palette,
   },
 });
 

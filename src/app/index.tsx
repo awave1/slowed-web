@@ -32,7 +32,8 @@ export function App() {
         </div>
       </div>
 
-      <Footer />
+      {/* TODO: removed for now */}
+      {/* <Footer /> */}
     </div>
   );
 }
