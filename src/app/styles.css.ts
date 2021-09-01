@@ -1,6 +1,23 @@
 import { composeStyles, style } from "@vanilla-extract/css";
 import { atoms } from "@slowed/app/style/sprinkles.css";
 
+export const MainContainer = composeStyles(
+  atoms({
+    background: {
+      dark: "gray-800",
+      light: "warmGray-400",
+    },
+  }),
+  style({
+    display: "flex",
+    flexDirection: "column",
+    width: "100%",
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+  })
+);
+
 export const AppContainer = composeStyles(
   atoms({
     background: {
@@ -11,13 +28,23 @@ export const AppContainer = composeStyles(
       light: "black",
       dark: "white",
     },
+    width: {
+      desktop: "window",
+      mobile: "full",
+      tablet: "full",
+    },
+    height: {
+      desktop: "window",
+      mobile: "full",
+      tablet: "full",
+    },
   }),
   style({
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center",
     alignItems: "center",
-    height: "100vh",
+    justifyContent: "center",
+    boxShadow: "0px 0px 25px #0000004f",
   })
 );
 

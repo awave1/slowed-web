@@ -14,3 +14,8 @@ globalStyle("ul", {
   padding: 0,
   margin: 0,
 });
+
+globalStyle("html, body, #root", {
+  width: "100%",
+  height: "100%",
+});

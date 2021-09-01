@@ -1,3 +1,4 @@
+import { atoms } from "@slowed/app/style/sprinkles.css";
 import { theme } from "@slowed/app/theme/styles.css";
 import { style, composeStyles } from "@vanilla-extract/css";
 
@@ -21,6 +22,12 @@ export const List = style({
 });
 
 export const SongItem = composeStyles(
+  atoms({
+    color: {
+      dark: "white",
+      light: "black",
+    },
+  }),
   style({
     width: "100%",
     cursor: "pointer",
@@ -39,6 +46,12 @@ export const SongItem = composeStyles(
 
 export const SongItemActive = composeStyles(
   SongItem,
+  atoms({
+    color: {
+      dark: "rose-400",
+      light: "rose-400",
+    },
+  }),
   style({
     fontWeight: "bold",
     color: theme.colors["rose-400"],

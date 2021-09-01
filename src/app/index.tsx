@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  MainContainer,
   AppContainer,
   MainGrid,
   PlayerViewContainer,
@@ -17,17 +18,19 @@ export function App() {
     setThemeVariant(themeVariant === "light" ? "dark" : "light");
 
   return (
-    <div className={AppContainer}>
-      <button type="button" onClick={onSetThemeVariant}>
-        theme
-      </button>
+    <div className={MainContainer}>
+      <div className={AppContainer}>
+        <button type="button" onClick={onSetThemeVariant}>
+          theme
+        </button>
 
-      <div className={MainGrid}>
-        <div className={SongListContainer}>
-          <SongList />
-        </div>
-        <div className={PlayerViewContainer}>
-          <PlayerView />
+        <div className={MainGrid}>
+          <div className={SongListContainer}>
+            <SongList />
+          </div>
+          <div className={PlayerViewContainer}>
+            <PlayerView />
+          </div>
         </div>
       </div>
     </div>

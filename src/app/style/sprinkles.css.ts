@@ -29,6 +29,43 @@ export const palette = buildColorPalette();
 export const lightMode = "light";
 export const darkMode = "dark";
 
+const spacing = {
+  none: 0,
+  xs: "2px",
+  sm: "4px",
+  md: "8px",
+  lg: "16px",
+  xl: "32px",
+};
+
+const widths = {
+  window: "50%",
+  full: "100%",
+};
+
+const heights: typeof widths = {
+  window: "75%",
+  full: "100vh",
+};
+
+const responsive = createAtomicStyles({
+  conditions: {
+    mobile: {},
+    tablet: { "@media": "screen and (min-width: 768px)" },
+    desktop: { "@media": "screen and (min-width: 1024px)" },
+  },
+  defaultCondition: "mobile",
+  properties: {
+    display: ["none", "flex", "block"],
+    width: widths,
+    height: heights,
+    paddingTop: spacing,
+    paddingBottom: spacing,
+    paddingLeft: spacing,
+    paddingRight: spacing,
+  },
+});
+
 const colors = createAtomicStyles({
   conditions: {
     light: {},
@@ -43,5 +80,5 @@ const colors = createAtomicStyles({
   },
 });
 
-export const atoms = createAtomsFn(colors);
+export const atoms = createAtomsFn(colors, responsive);
 export type Atoms = Parameters<typeof atoms>[0];
