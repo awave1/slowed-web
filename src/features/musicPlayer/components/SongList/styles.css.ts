@@ -20,12 +20,16 @@ export const List = style({
   listStyle: "none",
 });
 
-export const ListItem = composeStyles(
+export const SongItem = composeStyles(
   style({
+    width: "100%",
     cursor: "pointer",
     borderRadius: 8,
     padding: 8,
     transition: "all 100ms ease-in-out",
+    border: "none",
+    background: "transparent",
+    boxShadow: "none",
     ":hover": {
       fontWeight: "bold",
       color: theme.colors["rose-200"],
@@ -33,8 +37,8 @@ export const ListItem = composeStyles(
   })
 );
 
-export const ListItemActive = composeStyles(
-  ListItem,
+export const SongItemActive = composeStyles(
+  SongItem,
   style({
     fontWeight: "bold",
     color: theme.colors["rose-400"],

@@ -3,8 +3,8 @@ import { useSongList } from "@slowed/features/musicPlayer/components/SongList/us
 import { FileUpload } from "@slowed/features/fileUpload/components/FileUpload";
 import {
   List,
-  ListItem,
-  ListItemActive,
+  SongItem,
+  SongItemActive,
   SongListContainer,
   SongListWrapper,
 } from "@slowed/features/musicPlayer/components/SongList/styles.css";
@@ -18,15 +18,16 @@ export const SongList = () => {
         <ul className={List}>
           {songs.map((song) => (
             // TODO: extract
-            <li
-              className={
-                currentSong && song.name === currentSong.name
-                  ? ListItemActive
-                  : ListItem
-              }
-              key={song.name}
-            >
-              <button type="button" onClick={handlers.onSongSelected(song)}>
+            <li key={song.name}>
+              <button
+                className={
+                  currentSong && song.name === currentSong.name
+                    ? SongItemActive
+                    : SongItem
+                }
+                type="button"
+                onClick={handlers.onSongSelected(song)}
+              >
                 {song.name}
               </button>
             </li>
