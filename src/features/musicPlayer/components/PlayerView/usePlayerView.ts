@@ -1,5 +1,6 @@
 import { useStore } from "@slowed/store/hooks";
-import React, { useEffect, useRef, useState } from "react";
+import type React from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function usePlayerView() {
   const currentSong = useStore((store) => store.currentSong);
@@ -11,6 +12,21 @@ export function usePlayerView() {
   const [playing, setPlaying] = useState(false);
   const [seeking, setSeeking] = useState(false);
   const requestAnimationFrameIdRef = useRef<number | undefined>(undefined);
+
+  const renderSeekPosition = () => {
+    if (!sound) {
+      return;
+    }
+
+    if (!seeking) {
+      setSeek(sound.seek() as number);
+    }
+
+    if (playing) {
+      requestAnimationFrameIdRef.current =
+        window.requestAnimationFrame(renderSeekPosition);
+    }
+  };
 
   useEffect(() => {
     if (playing) {
@@ -46,21 +62,6 @@ export function usePlayerView() {
       const value = Number.parseFloat(event.target.value);
       setPlaybackRate(value);
       sound.rate(value);
-    }
-  };
-
-  const renderSeekPosition = () => {
-    if (!sound) {
-      return;
-    }
-
-    if (!seeking) {
-      setSeek(sound.seek() as number);
-    }
-
-    if (playing) {
-      requestAnimationFrameIdRef.current =
-        window.requestAnimationFrame(renderSeekPosition);
     }
   };
 

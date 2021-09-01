@@ -27,7 +27,7 @@ export const PlayerView = () => {
           onChange={handlers.onSeekChange}
         />
 
-        <button onClick={handlers.onPlayClicked}>
+        <button type="button" onClick={handlers.onPlayClicked}>
           {state.playing ? <FaPauseCircle /> : <FaPlayCircle />}
         </button>
       </div>

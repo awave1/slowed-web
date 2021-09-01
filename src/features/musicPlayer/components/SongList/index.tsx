@@ -25,9 +25,10 @@ export const SongList = () => {
                   : ListItem
               }
               key={song.name}
-              onClick={handlers.onSongSelected(song)}
             >
-              {song.name}
+              <button type="button" onClick={handlers.onSongSelected(song)}>
+                {song.name}
+              </button>
             </li>
           ))}
         </ul>

@@ -1,4 +1,3 @@
-import { atoms } from "@slowed/app/style/sprinkles.css";
 import { theme } from "@slowed/app/theme/styles.css";
 import { style, composeStyles } from "@vanilla-extract/css";
 
