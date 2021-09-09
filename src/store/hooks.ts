@@ -1,5 +1,5 @@
 import { createTypedHooks } from "easy-peasy";
-import { AppStore } from "./types/AppStore";
+import type { AppStore } from "./types/AppStore";
 
 const typedHooks = createTypedHooks<AppStore>();
 

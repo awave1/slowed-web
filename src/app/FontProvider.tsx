@@ -10,5 +10,6 @@ export const FontProvider: FC = ({ children }) => {
       google: { families: ["Noto Sans JP", "Lato"] },
     });
   }, []);
+
   return <FontContext.Provider value={null}>{children}</FontContext.Provider>;
 };

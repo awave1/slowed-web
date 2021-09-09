@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  MainContainer,
   AppContainer,
   MainGrid,
   PlayerViewContainer,
@@ -7,34 +8,31 @@ import {
 } from "@slowed/app/styles.css";
 import { SongList } from "@slowed/features/musicPlayer/components/SongList";
 import { PlayerView } from "@slowed/features/musicPlayer/components/PlayerView";
-import { Footer } from "@slowed/features/shell/components/Footer";
 import { useThemeProvider } from "@slowed/app/theme/ThemeProvider";
 import "@slowed/app/app.css";
 
 export function App() {
   const { themeVariant, setThemeVariant } = useThemeProvider();
 
-  return (
-    <div className={AppContainer}>
-      <button
-        onClick={() =>
-          setThemeVariant(themeVariant === "light" ? "dark" : "light")
-        }
-      >
-        theme
-      </button>
+  const onSetThemeVariant = () =>
+    setThemeVariant(themeVariant === "light" ? "dark" : "light");
 
-      <div className={MainGrid}>
-        <div className={SongListContainer}>
-          <SongList />
-        </div>
-        <div className={PlayerViewContainer}>
-          <PlayerView />
+  return (
+    <div className={MainContainer}>
+      <div className={AppContainer}>
+        <button type="button" onClick={onSetThemeVariant}>
+          theme
+        </button>
+
+        <div className={MainGrid}>
+          <div className={SongListContainer}>
+            <SongList />
+          </div>
+          <div className={PlayerViewContainer}>
+            <PlayerView />
+          </div>
         </div>
       </div>
-
-      {/* TODO: removed for now */}
-      {/* <Footer /> */}
     </div>
   );
 }

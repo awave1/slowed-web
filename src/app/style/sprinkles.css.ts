@@ -1,41 +1,9 @@
 import { createAtomicStyles, createAtomsFn } from "@vanilla-extract/sprinkles";
 import tailwindColors from "tailwindcss/colors";
+import type { BaseColor, ColorEntry, ColorKey } from "@slowed/app/style/types";
 
-type ColorName =
-  | "gray"
-  | "rose"
-  | "fuchsia"
-  | "pink"
-  | "purple"
-  | "violet"
-  | "indigo"
-  | "blue"
-  | "sky"
-  | "cyan"
-  | "teal"
-  | "emerald"
-  | "green"
-  | "lime"
-  | "yellow"
-  | "amber"
-  | "orange"
-  | "red"
-  | "warmGray"
-  | "gray"
-  | "coolGray"
-  | "blueGray";
-
-type ColorValues = 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
-
-type BaseColor = "black" | "white";
-type ColorKey = `${ColorName}-${ColorValues}` | BaseColor;
-
-type ColorEntry = {
-  [key in ColorKey]: string;
-};
-
-const buildColorPalette = () => {
-  return Object.entries(tailwindColors).reduce<ColorEntry>(
+const buildColorPalette = () =>
+  Object.entries(tailwindColors).reduce<ColorEntry>(
     (current, [colorName, colorVal]) => {
       if (typeof colorVal === "string") {
         current[colorName as BaseColor] = colorVal;
@@ -55,12 +23,48 @@ const buildColorPalette = () => {
     },
     {} as ColorEntry
   );
-};
 
 export const palette = buildColorPalette();
 
 export const lightMode = "light";
 export const darkMode = "dark";
+
+const spacing = {
+  none: 0,
+  xs: "2px",
+  sm: "4px",
+  md: "8px",
+  lg: "16px",
+  xl: "32px",
+};
+
+const widths = {
+  window: "50%",
+  full: "100%",
+};
+
+const heights: typeof widths = {
+  window: "75%",
+  full: "100vh",
+};
+
+const responsive = createAtomicStyles({
+  conditions: {
+    mobile: {},
+    tablet: { "@media": "screen and (min-width: 768px)" },
+    desktop: { "@media": "screen and (min-width: 1024px)" },
+  },
+  defaultCondition: "mobile",
+  properties: {
+    display: ["none", "flex", "block"],
+    width: widths,
+    height: heights,
+    paddingTop: spacing,
+    paddingBottom: spacing,
+    paddingLeft: spacing,
+    paddingRight: spacing,
+  },
+});
 
 const colors = createAtomicStyles({
   conditions: {
@@ -76,5 +80,5 @@ const colors = createAtomicStyles({
   },
 });
 
-export const atoms = createAtomsFn(colors);
+export const atoms = createAtomsFn(colors, responsive);
 export type Atoms = Parameters<typeof atoms>[0];
